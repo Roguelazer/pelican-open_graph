@@ -56,11 +56,11 @@ def open_graph_tag(item):
     if image:
         ogtags.append(('og:image', image))
     else:
-        soup = BeautifulSoup(item._content, 'html.parser')
+        soup = BeautifulSoup(item.content, 'html.parser')
         img_links = soup.find_all('img')
-        if  (len(img_links) > 0):
+        if len(img_links) > 0:
             img_src = img_links[0].get('src')
-            if not "http" in img_src:
+            if "http" not in img_src:
                 if item.settings.get('SITEURL', ''):
                     img_src = item.settings.get('SITEURL', '') + "/" + img_src
             ogtags.append(('og:image', img_src))
